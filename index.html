@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#6c5ce7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Lyfta">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="images/icon-192.png">
+    <title>Harsh Jha - Workout Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/muscles.css">
+    <link rel="stylesheet" href="css/exercises.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>HarshTrains</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="header-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="header-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search exercises...">
+                    <button class="close-search" id="closeSearch">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Dashboard Screen -->
+            <section class="screen active" id="dashboardScreen">
+                <div class="screen-content">
+                    
+                    <!-- Welcome Card -->
+                    <div class="welcome-card">
+                        <div class="welcome-text">
+                            <span class="greeting" id="greeting">Good Morning</span>
+                            <h1>Ready to train?</h1>
+                        </div>
+                        <div class="welcome-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="weeklyWorkouts">0</span>
+                                <span class="stat-label">This Week</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalWorkouts">0</span>
+                                <span class="stat-label">Total Workouts</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-fire-flame-curved"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="currentStreak">0</span>
+                                <span class="stat-label">Day Streak</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-weight-hanging"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="totalVolume">0</span>
+                                <span class="stat-label">Total kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Start Workout Button -->
+                    <button class="start-workout-btn" id="startWorkoutBtn">
+                        <i class="fas fa-plus"></i>
+                        <span>Start Empty Workout</span>
+                    </button>
+
+                    <!-- Recent Workouts -->
+                    <div class="section-header">
+                        <h2>Recent Workouts</h2>
+                        <button class="see-all-btn">See All</button>
+                    </div>
+                    <div class="recent-workouts" id="recentWorkouts">
+                        <div class="empty-state">
+                            <i class="fas fa-dumbbell"></i>
+                            <p>No workouts yet</p>
+                            <span>Start your first workout!</span>
+                        </div>
+                    </div>
+
+                    <!-- Muscle Map Preview -->
+                    <div class="section-header">
+                        <h2>Muscle Activity</h2>
+                        <button class="see-all-btn" id="viewMuscleMap">View Map</button>
+                    </div>
+                    <div class="muscle-preview-card" id="musclePreviewCard">
+                        <div class="muscle-mini-stats">
+                            <div class="muscle-stat">
+                                <span class="muscle-name">Chest</span>
+                                <div class="muscle-bar">
+                                    <div class="muscle-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="muscle-stat">
+                                <span class="muscle-name">Back</span>
+                                <div class="muscle-bar">
+                                    <div class="muscle-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="muscle-stat">
+                                <span class="muscle-name">Legs</span>
+                                <div class="muscle-bar">
+                                    <div class="muscle-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Exercises Screen -->
+            <section class="screen" id="exercisesScreen">
+                <div class="screen-content">
+                    
+                    <div class="exercises-header">
+                        <h1>Exercises</h1>
+                        <p>Browse 100+ exercises</p>
+                    </div>
+
+                    <!-- Filter Chips -->
+                    <div class="filter-section">
+                        <div class="filter-chips" id="muscleFilters">
+                            <button class="filter-chip active" data-filter="all">All</button>
+                            <button class="filter-chip" data-filter="chest">Chest</button>
+                            <button class="filter-chip" data-filter="back">Back</button>
+                            <button class="filter-chip" data-filter="shoulders">Shoulders</button>
+                            <button class="filter-chip" data-filter="biceps">Biceps</button>
+                            <button class="filter-chip" data-filter="triceps">Triceps</button>
+                            <button class="filter-chip" data-filter="legs">Legs</button>
+                            <button class="filter-chip" data-filter="core">Core</button>
+                        </div>
+                    </div>
+
+                    <!-- Equipment Filter -->
+                    <div class="filter-section">
+                        <div class="filter-chips" id="equipmentFilters">
+                            <button class="filter-chip active" data-equipment="all">All Equipment</button>
+                            <button class="filter-chip" data-equipment="barbell">Barbell</button>
+                            <button class="filter-chip" data-equipment="dumbbell">Dumbbell</button>
+                            <button class="filter-chip" data-equipment="cable">Cable</button>
+                            <button class="filter-chip" data-equipment="machine">Machine</button>
+                            <button class="filter-chip" data-equipment="bodyweight">Bodyweight</button>
+                        </div>
+                    </div>
+
+                    <!-- Exercise List -->
+                    <div class="exercise-list" id="exerciseList">
+                        <!-- Exercises will be loaded here -->
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Muscle Map Screen -->
+            <section class="screen" id="muscleScreen">
+                <div class="screen-content">
+                    
+                    <div class="muscle-header">
+                        <h1>Muscle Map</h1>
+                        <p>Tap muscles to filter exercises</p>
+                    </div>
+
+                    <!-- Body View Toggle -->
+                    <div class="body-toggle">
+                        <button class="toggle-btn active" id="frontViewBtn">Front</button>
+                        <button class="toggle-btn" id="backViewBtn">Back</button>
+                    </div>
+
+                    <!-- Muscle Body Container -->
+                    <div class="body-container">
+                        
+                        <!-- Front View -->
+                        <div class="body-view active" id="frontView">
+                            <svg viewBox="0 0 200 400" class="body-svg" id="frontBodySvg">
+                                <!-- Head -->
+                                <ellipse cx="100" cy="30" rx="25" ry="28" class="body-part head"/>
+                                
+                                <!-- Neck -->
+                                <path d="M90 55 L90 70 L110 70 L110 55" class="body-part neck" data-muscle="neck"/>
+                                
+                                <!-- Shoulders -->
+                                <ellipse cx="55" cy="85" rx="18" ry="12" class="muscle-part" data-muscle="shoulders" id="front-left-shoulder"/>
+                                <ellipse cx="145" cy="85" rx="18" ry="12" class="muscle-part" data-muscle="shoulders" id="front-right-shoulder"/>
+                                
+                                <!-- Chest -->
+                                <path d="M65 80 Q75 75 100 78 Q125 75 135 80 L135 115 Q100 125 65 115 Z" class="muscle-part" data-muscle="chest" id="front-chest"/>
+                                
+                                <!-- Abs -->
+                                <path d="M75 120 L75 180 Q100 185 125 180 L125 120 Q100 125 75 120" class="muscle-part" data-muscle="core" id="front-abs"/>
+                                
+                                <!-- Obliques -->
+                                <path d="M65 115 L75 120 L75 175 L65 170 Z" class="muscle-part" data-muscle="core" id="front-left-oblique"/>
+                                <path d="M135 115 L125 120 L125 175 L135 170 Z" class="muscle-part" data-muscle="core" id="front-right-oblique"/>
+                                
+                                <!-- Biceps -->
+                                <path d="M40 95 Q32 120 35 150 Q45 155 50 150 Q55 120 50 95 Z" class="muscle-part" data-muscle="biceps" id="front-left-bicep"/>
+                                <path d="M160 95 Q168 120 165 150 Q155 155 150 150 Q145 120 150 95 Z" class="muscle-part" data-muscle="biceps" id="front-right-bicep"/>
+                                
+                                <!-- Forearms -->
+                                <path d="M35 155 Q30 180 32 210 L45 210 Q48 180 50 155 Z" class="muscle-part" data-muscle="forearms" id="front-left-forearm"/>
+                                <path d="M165 155 Q170 180 168 210 L155 210 Q152 180 150 155 Z" class="muscle-part" data-muscle="forearms" id="front-right-forearm"/>
+                                
+                                <!-- Hands -->
+                                <ellipse cx="38" cy="225" rx="10" ry="15" class="body-part hand"/>
+                                <ellipse cx="162" cy="225" rx="10" ry="15" class="body-part hand"/>
+                                
+                                <!-- Quads -->
+                                <path d="M70 185 L65 260 Q80 270 95 260 L95 185 Q82 190 70 185" class="muscle-part" data-muscle="legs" id="front-left-quad"/>
+                                <path d="M130 185 L135 260 Q120 270 105 260 L105 185 Q118 190 130 185" class="muscle-part" data-muscle="legs" id="front-right-quad"/>
+                                
+                                <!-- Knees -->
+                                <ellipse cx="80" cy="275" rx="12" ry="10" class="body-part knee"/>
+                                <ellipse cx="120" cy="275" rx="12" ry="10" class="body-part knee"/>
+                                
+                                <!-- Calves (front) -->
+                                <path d="M68 290 L65 350 Q80 355 90 350 L90 290 Q80 295 68 290" class="muscle-part" data-muscle="legs" id="front-left-calf"/>
+                                <path d="M132 290 L135 350 Q120 355 110 350 L110 290 Q120 295 132 290" class="muscle-part" data-muscle="legs" id="front-right-calf"/>
+                                
+                                <!-- Feet -->
+                                <ellipse cx="77" cy="370" rx="15" ry="8" class="body-part foot"/>
+                                <ellipse cx="123" cy="370" rx="15" ry="8" class="body-part foot"/>
+                            </svg>
+                        </div>
+
+                        <!-- Back View -->
+                        <div class="body-view" id="backView">
+                            <svg viewBox="0 0 200 400" class="body-svg" id="backBodySvg">
+                                <!-- Head -->
+                                <ellipse cx="100" cy="30" rx="25" ry="28" class="body-part head"/>
+                                
+                                <!-- Neck/Traps -->
+                                <path d="M75 55 L65 80 L135 80 L125 55 Z" class="muscle-part" data-muscle="back" id="back-traps"/>
+                                
+                                <!-- Rear Delts -->
+                                <ellipse cx="55" cy="90" rx="18" ry="14" class="muscle-part" data-muscle="shoulders" id="back-left-delt"/>
+                                <ellipse cx="145" cy="90" rx="18" ry="14" class="muscle-part" data-muscle="shoulders" id="back-right-delt"/>
+                                
+                                <!-- Upper Back (Rhomboids) -->
+                                <path d="M70 85 L70 115 Q100 120 130 115 L130 85 Q100 80 70 85" class="muscle-part" data-muscle="back" id="back-upper"/>
+                                
+                                <!-- Lats -->
+                                <path d="M60 100 L55 160 Q75 170 95 165 L95 115 Q75 120 60 100" class="muscle-part" data-muscle="back" id="back-left-lat"/>
+                                <path d="M140 100 L145 160 Q125 170 105 165 L105 115 Q125 120 140 100" class="muscle-part" data-muscle="back" id="back-right-lat"/>
+                                
+                                <!-- Lower Back -->
+                                <path d="M80 165 L80 185 Q100 190 120 185 L120 165 Q100 170 80 165" class="muscle-part" data-muscle="back" id="back-lower"/>
+                                
+                                <!-- Triceps -->
+                                <path d="M38 95 Q30 125 33 155 Q43 160 52 155 Q58 125 52 95 Z" class="muscle-part" data-muscle="triceps" id="back-left-tricep"/>
+                                <path d="M162 95 Q170 125 167 155 Q157 160 148 155 Q142 125 148 95 Z" class="muscle-part" data-muscle="triceps" id="back-right-tricep"/>
+                                
+                                <!-- Forearms -->
+                                <path d="M33 160 Q28 185 30 215 L45 215 Q48 185 52 160 Z" class="muscle-part" data-muscle="forearms" id="back-left-forearm"/>
+                                <path d="M167 160 Q172 185 170 215 L155 215 Q152 185 148 160 Z" class="muscle-part" data-muscle="forearms" id="back-right-forearm"/>
+                                
+                                <!-- Hands -->
+                                <ellipse cx="37" cy="230" rx="10" ry="15" class="body-part hand"/>
+                                <ellipse cx="163" cy="230" rx="10" ry="15" class="body-part hand"/>
+                                
+                                <!-- Glutes -->
+                                <ellipse cx="82" cy="200" rx="20" ry="18" class="muscle-part" data-muscle="legs" id="back-left-glute"/>
+                                <ellipse cx="118" cy="200" rx="20" ry="18" class="muscle-part" data-muscle="legs" id="back-right-glute"/>
+                                
+                                <!-- Hamstrings -->
+                                <path d="M65 220 L62 275 Q80 285 95 275 L95 220 Q80 225 65 220" class="muscle-part" data-muscle="legs" id="back-left-hamstring"/>
+                                <path d="M135 220 L138 275 Q120 285 105 275 L105 220 Q120 225 135 220" class="muscle-part" data-muscle="legs" id="back-right-hamstring"/>
+                                
+                                <!-- Calves -->
+                                <path d="M65 285 Q58 310 60 350 Q78 360 92 350 Q95 310 90 285 Q78 292 65 285" class="muscle-part" data-muscle="legs" id="back-left-calf"/>
+                                <path d="M135 285 Q142 310 140 350 Q122 360 108 350 Q105 310 110 285 Q122 292 135 285" class="muscle-part" data-muscle="legs" id="back-right-calf"/>
+                                
+                                <!-- Feet -->
+                                <ellipse cx="76" cy="370" rx="15" ry="8" class="body-part foot"/>
+                                <ellipse cx="124" cy="370" rx="15" ry="8" class="body-part foot"/>
+                            </svg>
+                        </div>
+
+                    </div>
+
+                    <!-- Selected Muscle Info -->
+                    <div class="muscle-info-card" id="muscleInfoCard">
+                        <div class="muscle-info-header">
+                            <h3 id="selectedMuscleName">Select a muscle</h3>
+                            <span class="exercise-count" id="muscleExerciseCount">Tap on the body</span>
+                        </div>
+                        <button class="view-exercises-btn" id="viewMuscleExercises" style="display: none;">
+                            View Exercises <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Weekly Muscle Activity -->
+                    <div class="section-header">
+                        <h2>Weekly Activity</h2>
+                    </div>
+                    <div class="muscle-activity-grid" id="muscleActivityGrid">
+                        <div class="activity-item">
+                            <span class="activity-muscle">Chest</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="chest"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Back</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="back"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Shoulders</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="shoulders"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Biceps</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="biceps"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Triceps</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="triceps"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Legs</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="legs"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-muscle">Core</span>
+                            <div class="activity-bar"><div class="activity-fill" data-muscle="core"></div></div>
+                            <span class="activity-sets">0 sets</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Workout Screen -->
+            <section class="screen" id="workoutScreen">
+                <div class="screen-content">
+                    
+                    <div class="workout-header">
+                        <h1>My Workouts</h1>
+                    </div>
+
+                     <!-- Create Template Button -->
+                     <button class="create-template-btn" id="createTemplateBtn">
+                         <i class="fas fa-plus"></i>
+                         <span>Create New Template</span>
+                    </button>
+
+                    <!-- Workout Templates -->
+                    <div class="section-header">
+                        <h2>Templates</h2>
+                        <button class="add-btn" id="createTemplateBtn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="template-list" id="templateList">
+                        <!-- Default Templates -->
+                        <div class="template-card" data-template="push">
+                            <div class="template-icon">
+                                <i class="fas fa-hand-fist"></i>
+                            </div>
+                            <div class="template-info">
+                                <h3>Push Day</h3>
+                                <p>Chest, Shoulders, Triceps</p>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="template-card" data-template="pull">
+                            <div class="template-icon">
+                                <i class="fas fa-arrows-to-dot"></i>
+                            </div>
+                            <div class="template-info">
+                                <h3>Pull Day</h3>
+                                <p>Back, Biceps, Rear Delts</p>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="template-card" data-template="legs">
+                            <div class="template-icon">
+                                <i class="fas fa-person-walking"></i>
+                            </div>
+                            <div class="template-info">
+                                <h3>Leg Day</h3>
+                                <p>Quads, Hamstrings, Calves</p>
+                            </div>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Workout History -->
+                    <div class="section-header">
+                        <h2>History</h2>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <div class="empty-state small">
+                            <i class="fas fa-history"></i>
+                            <p>No workout history</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Profile Screen -->
+            <section class="screen" id="profileScreen">
+                <div class="screen-content">
+                    
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h1 id="userName">Athlete</h1>
+                        <p>Member since <span id="memberSince">Today</span></p>
+                    </div>
+
+                    <!-- Profile Stats -->
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <span class="profile-stat-value" id="profileTotalWorkouts">0</span>
+                            <span class="profile-stat-label">Workouts</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-value" id="profileTotalExercises">0</span>
+                            <span class="profile-stat-label">Exercises</span>
+                        </div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-value" id="profileTotalVolume">0kg</span>
+                            <span class="profile-stat-label">Volume</span>
+                        </div>
+                    </div>
+
+                    <!-- Settings -->
+                    <div class="settings-section">
+                        <h2>Settings</h2>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-weight-scale"></i>
+                                <span>Weight Unit</span>
+                            </div>
+                            <div class="setting-toggle">
+                                <button class="unit-btn active" data-unit="kg">kg</button>
+                                <button class="unit-btn" data-unit="lbs">lbs</button>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-clock"></i>
+                                <span>Rest Timer</span>
+                            </div>
+                            <select class="setting-select" id="restTimerSelect">
+                                <option value="60">1:00</option>
+                                <option value="90" selected>1:30</option>
+                                <option value="120">2:00</option>
+                                <option value="180">3:00</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-bell"></i>
+                                <span>Notifications</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="notificationToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <i class="fas fa-vibrate"></i>
+                                <span>Haptic Feedback</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="hapticToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Data Management -->
+                    <div class="settings-section">
+                        <h2>Data</h2>
+                        
+                        <button class="data-btn" id="exportDataBtn">
+                            <i class="fas fa-download"></i>
+                            <span>Export Data</span>
+                        </button>
+                        
+                        <button class="data-btn danger" id="clearDataBtn">
+                            <i class="fas fa-trash"></i>
+                            <span>Clear All Data</span>
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Active Workout Screen (Overlay) -->
+            <section class="screen overlay" id="activeWorkoutScreen">
+                <div class="active-workout-header">
+                    <button class="back-btn" id="minimizeWorkout">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="workout-timer" id="workoutTimer">00:00</div>
+                    <button class="finish-btn" id="finishWorkout">Finish</button>
+                </div>
+
+                <div class="screen-content">
+                    <input type="text" class="workout-title-input" id="workoutTitleInput" placeholder="Workout Name" value="New Workout">
+                    
+                    <div class="active-exercises" id="activeExercises">
+                        <!-- Exercises will be added here -->
+                    </div>
+
+                    <button class="add-exercise-btn" id="addExerciseBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Exercise
+                    </button>
+                </div>
+            </section>
+
+            <!-- Exercise Detail Modal -->
+            <div class="modal" id="exerciseDetailModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="modal-close" id="closeExerciseModal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="exercise-detail-image" id="exerciseDetailImage">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h2 id="exerciseDetailName">Exercise Name</h2>
+                        <div class="exercise-detail-tags">
+                            <span class="tag" id="exerciseDetailMuscle">Muscle</span>
+                            <span class="tag" id="exerciseDetailEquipment">Equipment</span>
+                        </div>
+                        <div class="exercise-detail-muscles">
+                            <h3>Target Muscles</h3>
+                            <div class="mini-body-container" id="miniBodyContainer">
+                                <!-- Mini muscle diagram will be here -->
+                            </div>
+                        </div>
+                        <div class="exercise-instructions">
+                            <h3>Instructions</h3>
+                            <ol id="exerciseInstructions">
+                                <li>Step 1</li>
+                            </ol>
+                        </div>
+                        <button class="add-to-workout-btn" id="addToWorkoutBtn">
+                            <i class="fas fa-plus"></i>
+                            Add to Workout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rest Timer Modal -->
+            <div class="modal timer-modal" id="restTimerModal">
+                <div class="timer-content">
+                    <div class="timer-circle">
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle class="timer-bg" cx="50" cy="50" r="45"/>
+                            <circle class="timer-progress" cx="50" cy="50" r="45" id="timerProgress"/>
+                        </svg>
+                        <div class="timer-display" id="timerDisplay">1:30</div>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="timerMinus">-15s</button>
+                        <button class="timer-btn skip" id="timerSkip">Skip</button>
+                        <button class="timer-btn" id="timerPlus">+15s</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-screen="dashboardScreen">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-screen="exercisesScreen">
+                <i class="fas fa-dumbbell"></i>
+                <span>Exercises</span>
+            </button>
+            <button class="nav-item" data-screen="muscleScreen">
+                <i class="fas fa-child"></i>
+                <span>Muscles</span>
+            </button>
+            <button class="nav-item" data-screen="workoutScreen">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Workouts</span>
+            </button>
+            <button class="nav-item" data-screen="profileScreen">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <!-- Floating Workout Indicator -->
+        <div class="floating-workout" id="floatingWorkout" style="display: none;">
+            <div class="floating-info">
+                <span class="floating-title">Workout Active</span>
+                <span class="floating-timer" id="floatingTimer">00:00</span>
+            </div>
+            <button class="floating-expand" id="expandWorkout">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+
+    </div>
+<!-- Service Worker Registration -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('✅ Service Worker registered:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        });
+    }
+</script>
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/muscles.js"></script>
+    <script src="js/exercises.js"></script>
+    <script src="js/workout.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/records.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/reminders.js"></script>
+    <script src="js/templates.js"></script>
+</body>
+</html>
