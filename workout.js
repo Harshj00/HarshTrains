@@ -1,7 +1,3 @@
-/* ========================================
-   LYFTA CLONE - WORKOUT LOGIC
-   ======================================== */
-
 const Workout = {
     currentWorkout: null,
     timerInterval: null,
@@ -513,4 +509,5 @@ const Workout = {
             'danger'
         );
     }
+
 };
