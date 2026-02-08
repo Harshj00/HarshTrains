@@ -1,8 +1,4 @@
-/* ========================================
-   LYFTA CLONE - MAIN STYLES
-   ======================================== */
 
-/* CSS Variables */
 :root {
     /* Dark Theme Colors */
     --bg-primary: #0a0a0f;
@@ -968,4 +964,5 @@ body {
 
 .create-template-btn i {
     font-size: 1.2rem;
+
 }
