@@ -6,9 +6,7 @@ const App = {
     workoutTimerInterval: null,
     selectedExercise: null,
 
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
+
     init() {
         this.setupEventListeners();
         this.loadDashboard();
@@ -18,9 +16,6 @@ const App = {
         console.log('🏋️ Lyfta Clone initialized!');
     },
 
-    // ==========================================
-    // EVENT LISTENERS
-    // ==========================================
     setupEventListeners() {
         // Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -834,3 +829,4 @@ document.addEventListener('DOMContentLoaded', () => {
     App.init();
 
 });
+
