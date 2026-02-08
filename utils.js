@@ -1,11 +1,5 @@
-/* ========================================
-   LYFTA CLONE - UTILITIES
-   ======================================== */
-
 const Utils = {
-    // ==========================================
-    // RIPPLE EFFECT
-    // ==========================================
+
     addRipple(element, event) {
         const ripple = document.createElement('span');
         ripple.className = 'ripple';
@@ -287,4 +281,5 @@ document.addEventListener('click', (e) => {
 });
 
 // Initialize install prompt
+
 Utils.initInstallPrompt();
