@@ -1,13 +1,5 @@
-/* ========================================
-   LYFTA CLONE - WORKOUT REMINDERS
-   ======================================== */
-
 const Reminders = {
     STORAGE_KEY: 'lyfta_reminders',
-
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
     init() {
         this.checkPermission();
         this.addReminderStyles();
@@ -498,4 +490,5 @@ const Reminders = {
 document.addEventListener('DOMContentLoaded', () => {
     Reminders.init();
     Reminders.scheduleAllReminders();
+
 });
