@@ -1,7 +1,3 @@
-/* ========================================
-   LYFTA CLONE - EXERCISES LOGIC
-   ======================================== */
-
 const Exercises = {
     currentMuscleFilter: 'all',
     currentEquipmentFilter: 'all',
@@ -249,4 +245,5 @@ const Exercises = {
 // Initialize when exercises screen is first loaded
 document.addEventListener('DOMContentLoaded', () => {
     Exercises.setupEventListeners();
+
 });
