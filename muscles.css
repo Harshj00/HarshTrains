@@ -1,8 +1,3 @@
-/* ========================================
-   MUSCLE MAP STYLES
-   ======================================== */
-
-/* Muscle Screen Header */
 .muscle-header {
     text-align: center;
     margin-bottom: var(--space-lg);
@@ -246,4 +241,5 @@
 .mini-body-container .muscle-part.secondary {
     fill: var(--accent-secondary);
     opacity: 0.7;
+
 }
