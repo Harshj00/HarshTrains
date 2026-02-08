@@ -1,7 +1,3 @@
-/* ========================================
-   LYFTA CLONE - MAIN APP LOGIC
-   ======================================== */
-
 const App = {
     // Current state
     currentScreen: 'dashboardScreen',
@@ -836,4 +832,5 @@ const App = {
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
+
 });
