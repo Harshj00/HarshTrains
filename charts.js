@@ -1,11 +1,5 @@
-/* ========================================
-   LYFTA CLONE - CHARTS & ANALYTICS
-   ======================================== */
-
 const Charts = {
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
+
     init() {
         this.createChartStyles();
     },
@@ -599,4 +593,5 @@ const Charts = {
 };
 
 // Initialize
+
 Charts.init();
