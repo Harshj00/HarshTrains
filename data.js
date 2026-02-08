@@ -1,8 +1,3 @@
-/* ========================================
-   LYFTA CLONE - EXERCISE DATABASE
-   100+ Exercises with Full Details
-   ======================================== */
-
 const ExerciseDatabase = {
     exercises: [
         // ==========================================
@@ -2543,4 +2538,5 @@ const UserData = {
 // Initialize UserData on load
 document.addEventListener('DOMContentLoaded', () => {
     UserData.init();
+
 });
