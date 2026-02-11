@@ -3,9 +3,7 @@ const Exercises = {
     currentEquipmentFilter: 'all',
     exercises: [],
 
-    // ==========================================
-    // INITIALIZATION
-    // ==========================================
+    
     init() {
         this.setupEventListeners();
         this.loadExercises();
@@ -247,3 +245,4 @@ document.addEventListener('DOMContentLoaded', () => {
     Exercises.setupEventListeners();
 
 });
+
