@@ -1,14 +1,8 @@
-/* ========================================
-   LYFTA CLONE - CALENDAR VIEW
-   ======================================== */
-
 const Calendar = {
     currentDate: new Date(),
     selectedDate: null,
 
-    // ==========================================
-    // RENDER CALENDAR
-    // ==========================================
+    
     render(container) {
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
@@ -352,4 +346,5 @@ const Calendar = {
         `;
         document.head.appendChild(styles);
     }
+
 };
