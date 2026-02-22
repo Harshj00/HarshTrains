@@ -1,0 +1,249 @@
+/* ========================================
+   MUSCLE MAP STYLES
+   ======================================== */
+
+/* Muscle Screen Header */
+.muscle-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.muscle-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+}
+
+.muscle-header p {
+    color: var(--text-secondary);
+}
+
+/* Body View Toggle */
+.body-toggle {
+    display: flex;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: var(--space-md);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+}
+
+.toggle-btn.active {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* Body Container */
+.body-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+    min-height: 350px;
+}
+
+.body-view {
+    display: none;
+    width: 100%;
+    max-width: 280px;
+}
+
+.body-view.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Body SVG */
+.body-svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Body Parts (non-interactive) */
+.body-part {
+    fill: var(--bg-tertiary);
+    stroke: var(--bg-primary);
+    stroke-width: 1;
+    transition: var(--transition-normal);
+}
+
+.body-part.head {
+    fill: #3a3a4a;
+}
+
+.body-part.hand,
+.body-part.foot {
+    fill: #2a2a3a;
+}
+
+.body-part.knee {
+    fill: #252530;
+}
+
+/* Muscle Parts (interactive) */
+.muscle-part {
+    fill: var(--muscle-inactive);
+    stroke: var(--bg-primary);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.muscle-part:hover {
+    fill: var(--accent-secondary);
+    filter: brightness(1.2);
+}
+
+.muscle-part.selected {
+    fill: var(--accent-primary);
+    filter: drop-shadow(0 0 8px var(--accent-primary));
+}
+
+/* Muscle Activity Levels */
+.muscle-part.activity-light {
+    fill: var(--muscle-light);
+}
+
+.muscle-part.activity-medium {
+    fill: var(--muscle-medium);
+}
+
+.muscle-part.activity-heavy {
+    fill: var(--muscle-heavy);
+}
+
+.muscle-part.activity-intense {
+    fill: var(--muscle-intense);
+}
+
+/* Muscle Info Card */
+.muscle-info-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.muscle-info-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    text-transform: capitalize;
+}
+
+.exercise-count {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.view-exercises-btn {
+    width: 100%;
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    transition: var(--transition-fast);
+}
+
+.view-exercises-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Muscle Activity Grid */
+.muscle-activity-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+}
+
+.activity-muscle {
+    width: 80px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.activity-bar {
+    flex: 1;
+    height: 10px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.activity-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.activity-fill[data-muscle="chest"] { background: var(--purple); }
+.activity-fill[data-muscle="back"] { background: var(--blue); }
+.activity-fill[data-muscle="shoulders"] { background: var(--orange); }
+.activity-fill[data-muscle="biceps"] { background: var(--pink); }
+.activity-fill[data-muscle="triceps"] { background: var(--cyan); }
+.activity-fill[data-muscle="legs"] { background: var(--green); }
+.activity-fill[data-muscle="core"] { background: var(--warning); }
+
+.activity-sets {
+    width: 60px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+}
+
+/* Mini Body Container (for exercise detail) */
+.mini-body-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+}
+
+.mini-body-container .body-svg {
+    max-width: 100px;
+    height: auto;
+}
+
+.mini-body-container .muscle-part {
+    cursor: default;
+}
+
+.mini-body-container .muscle-part.highlighted {
+    fill: var(--accent-primary);
+    filter: drop-shadow(0 0 4px var(--accent-primary));
+}
+
+.mini-body-container .muscle-part.secondary {
+    fill: var(--accent-secondary);
+    opacity: 0.7;
+}
