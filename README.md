@@ -4,7 +4,7 @@
 a comprehensive Web App workout tracker and gym planner designed to help users log exercises, build routines, and track strength training progress.
 HarshTrains is a fitness training and workout tracking application inspired by modern gym programming platforms. It enables users to follow structured workout routines, log exercises, and monitor performance over time.
 
-HarshTrains is a fitness training and workout tracking application inspired by modern gym programming platforms. It enables users to follow structured workout routines, log exercises, and monitor performance over time.
+HarshTrains is a fitness training and workout tracking application With AI Fitness Trainer. It enables users to follow structured workout routines, log exercises, Check Their Form Using AI monitoring & Monitor performance over time.
 
 Key Features
 
